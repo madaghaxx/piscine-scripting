@@ -1,2 +1,2 @@
 
-curl https://learn.zone01oujda.ma/assets/devops-branch/HeadTail.txt >> tail.txt && head -1 tail.txt && tail -1 tail.txt
+curl -s https://learn.zone01oujda.ma/assets/devops-branch/HeadTail.txt >> tail.txt && head -1 tail.txt && tail -1 tail.txt
