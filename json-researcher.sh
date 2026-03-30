@@ -1,3 +1,3 @@
 #!/bin/bash
 
-curl -s "https://learn.zone01oujda.ma/assets/superhero/all.json" | jq '.[] | select(.id == 1)' | grep -E '"name"|"power"'
+curl https://learn.zone01oujda.ma/assets/superhero/all.json | jq ".[] | select(.id == 1)" | grep -E "name|\"power\""
