@@ -1,3 +1,3 @@
 #!/bin/bash
 
-alias custom-ls='ls -lGas'
+alias custom-ls='ls -lASd'
