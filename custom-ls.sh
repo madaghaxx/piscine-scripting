@@ -1,3 +1,3 @@
 #!/bin/bash
 
-alias custom-ls='ls -laSo --block-size=1'
+ls -laSo --block-size=1K "$@" | awk '{$1=""; sub(/^ /, ""); print}'
