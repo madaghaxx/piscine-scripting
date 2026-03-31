@@ -1,3 +1,3 @@
 #!/bin/bash
 
-alias custom-ls='ls -lASd'
+alias custom-ls='ls -lSaoh'
