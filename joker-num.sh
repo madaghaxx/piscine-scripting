@@ -9,8 +9,9 @@ secret="$1"
 
 for ((move=1; move<=5; )); do
     tries_left=$((6 - move))
-    echo "Enter your guess ($tries_left tries left)"
+    echo "Enter your guess ($tries_left tries left):"
     read -r guess
+
     if [[ ! "$guess" =~ ^[0-9]+$ || "$guess" -lt 1 || "$guess" -gt 100 ]]; then
         continue
     fi
