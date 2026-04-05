@@ -17,7 +17,7 @@ do_divide() {
 }
 
 if [ $# -ne 3 ]; then
-    exit 1
+    exit 0
 fi
 
 num1=$1
@@ -38,6 +38,6 @@ case "$operator" in
         do_divide $num1 $num2
         ;;
     *)
-        exit 1
+        exit 0
         ;;
 esac
