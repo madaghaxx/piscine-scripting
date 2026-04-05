@@ -1,40 +1,62 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-error() {
-    printf '%s\n' "$1" >&2
-    exit 1
+do_add() {
+    echo $(( $1 + $2 ))
 }
 
-[ "$#" -eq 1 ] || error "Error: expect 1 argument only!"
+do_sub() {
+    echo $(( $1 - $2 ))
+}
 
-students=$1
-[[ $students =~ ^[0-9]+$ ]] || error "Error: expect 1 argument only!"
+do_mult() {
+    echo $(( $1 * $2 ))
+}
 
-names=()
-grades=()
-
-for ((i = 1; i <= students; i++)); do
-    read -r -p "Student Name #$i: " name
-    read -r -p "Student Grade #$i: " grade
-
-    [[ $grade =~ ^[1-9]+$ ]] && [ "$grade" -le 100 ] || \
-        error "Error: The grade '$grade' is not a valid input. Only numerical grades between 0 and 100 are accepted."
-
-    names+=("$name")
-    grades+=("$grade")
-done
-
-for ((i = 0; i < students; i++)); do
-    name=${names[i]}
-    grade=${grades[i]}
-
-    if [ "$grade" -ge 90 ]; then
-        echo "$name: You did an excellent job!"
-    elif [ "$grade" -ge 70 ]; then
-        echo "$name: You did a good job!"
-    elif [ "$grade" -ge 50 ]; then
-        echo "$name: You need a bit more effort!"
-    else
-        echo "$name: You had a poor performance!"
+do_divide() {
+    if [ "$2" -eq 0 ]; then
+        >&2 echo "Error: division by 0"
+        exit 2
     fi
-done
+    echo $(( $1 / $2 ))
+}
+
+if [ "$#" -ne 3 ]; then
+    >&2 echo "Error: expect 3 arguments"
+    exit 1
+fi
+
+num1=$1
+operator=$2
+num2=$3
+
+case "$operator" in
+    "+"|"-"|"*"|"/")
+        ;;
+    *)
+        >&2 echo "Error: invalid operator"
+        exit 3
+        ;;
+esac
+
+is_integer() {
+    case "$1" in
+        -[0-9]*|[0-9]*)
+            [ -n "${1#-}" ] && [ "${1#-}" != "$1" ] || [ -n "$1" ]
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+if ! [[ "$num1" =~ ^-?[0-9]+$ ]] || ! [[ "$num2" =~ ^-?[0-9]+$ ]]; then
+    >&2 echo "Error: invalid number"
+    exit 4
+fi
+
+case "$operator" in
+    "+") do_add "$num1" "$num2" ;;
+    "-") do_sub "$num1" "$num2" ;;
+    "*") do_mult "$num1" "$num2" ;;
+    "/") do_divide "$num1" "$num2" ;;
+esac

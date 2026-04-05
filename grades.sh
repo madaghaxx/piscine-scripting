@@ -2,7 +2,7 @@
 
 if [ $# -ne 1 ]; then
     echo "Error: expect 1 argument only!" >&2
-    exit 0
+    exit 1
 fi
 
 num_students=$1
@@ -16,12 +16,12 @@ for ((i=1; i<=num_students; i++)); do
     
     if ! [[ "$grade" =~ ^[0-9]+$ ]]; then
         echo "Error: The grade '$grade' is not a valid input. Only numerical grades between 0 and 100 are accepted." >&2
-        exit 0
+        exit 1
     fi
     
     if [ "$grade" -gt 100 ]; then
         echo "Error: The grade '$grade' is not a valid input. Only numerical grades between 0 and 100 are accepted." >&2
-        exit 0
+        exit 1
     fi
     
     names+=("$name")
