@@ -1,44 +1,27 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-do_add() {
-    echo $(($1 + $2))
+error() {
+    >&2 echo "$1"
+    exit "$2"
 }
 
-do_sub() {
-    echo $(($1 - $2))
-}
-
-do_mult() {
-    echo $(($1 * $2))
-}
-
-do_divide() {
-    echo $(($1 / $2))
-}
-
-if [ $# -ne 3 ]; then
-    echo "Error: expect 3 arguments"
-    exit 1
-fi
+[ "$#" -eq 3 ] || error "Error: expect 3 arguments" 1
 
 num1=$1
 operator=$2
 num2=$3
 
+[[ $num1 =~ ^-?[0-9]+$ && $num2 =~ ^-?[0-9]+$ ]] || error "Error: invalid number" 4
+
 case "$operator" in
-    "+")
-        do_add $num1 $num2
-        ;;
-    "-")
-        do_sub $num1 $num2
-        ;;
-    "*")
-        do_mult $num1 $num2
-        ;;
+    "+") echo $((num1 + num2)) ;;
+    "-") echo $((num1 - num2)) ;;
+    "*") echo $((num1 * num2)) ;;
     "/")
-        do_divide $num1 $num2
+        [ "$num2" -ne 0 ] || error "Error: division by 0" 2
+        echo $((num1 / num2))
         ;;
     *)
-        exit 0
+        error "Error: invalid operator" 3
         ;;
 esac
