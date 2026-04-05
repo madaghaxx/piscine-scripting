@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$#" -ne 2 ]; then
+    echo "Error: expect 2 arguments" >&2
+    exit 1
+fi
+
 flag="$1"
 username="$2"
 
@@ -12,6 +17,10 @@ case "$flag" in
         fi
         ;;
     -i)
-        getent passwd "$username"
+        getent passwd "$username" || true
+        ;;
+    *)
+        echo "Error: unknown flag" >&2
+        exit 1
         ;;
 esac
