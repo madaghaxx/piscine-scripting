@@ -8,6 +8,8 @@ error() {
 [ "$#" -eq 1 ] || error "Error: expect 1 argument only!"
 
 students=$1
+[[ $students =~ ^[0-9]+$ ]] || error "Error: expect 1 argument only!"
+
 names=()
 grades=()
 
@@ -15,8 +17,8 @@ for ((i = 1; i <= students; i++)); do
     read -r -p "Student Name #$i: " name
     read -r -p "Student Grade #$i: " grade
 
-    [[ $grade =~ ^[0-9]+$ ]] && [ "$grade" -le 100 ] \
-        || error "Error: The grade '$grade' is not a valid input. Only numerical grades between 0 and 100 are accepted."
+    [[ $grade =~ ^[0-9]+$ ]] && [ "$grade" -le 100 ] || \
+        error "Error: The grade '$grade' is not a valid input. Only numerical grades between 0 and 100 are accepted."
 
     names+=("$name")
     grades+=("$grade")
