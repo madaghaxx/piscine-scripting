@@ -17,7 +17,7 @@ do_divide() {
 }
 
 if [ $# -ne 3 ]; then
-    exit 0
+    exit 1
 fi
 
 num1=$1
