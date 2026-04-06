@@ -11,5 +11,5 @@ def divide(a, b):
 
 def integer_division(a, b):
     if b!= 0:
-        return round(a/b)
+        return a/b
     return 0
