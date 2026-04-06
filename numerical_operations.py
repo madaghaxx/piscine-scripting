@@ -11,7 +11,7 @@ def multiply(a, b):
     return a*b
 
 def power(a, b):
-    return round(math.pow(a,b))
+    return math.pow(a, b)
 
 def square_root(a):
     return math.sqrt(a)
