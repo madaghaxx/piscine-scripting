@@ -8,6 +8,6 @@ def clean_list(lista):
         klma = f"{i+1}/ {klma}"
         new.append(klma)
     if not any("milk" in item.lower() for item in lista):
-        new.append(f"{len(new)}x/ Milk")
+        new.append(f"{len(new) + 1}/ Milk")
 
     return new
