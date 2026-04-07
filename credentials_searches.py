@@ -19,5 +19,5 @@ def credentials_search():
                 credentials[key] = value
     
     if credentials:
-        with open('credentials.json', 'w') as f:
+        with open('credentials.json', 'xw') as f:
             json.dump(credentials, f, indent=2)
