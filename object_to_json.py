@@ -1,5 +1,4 @@
 import json
-# AI used here to finish
 class User:
     username = 'user'
     email = 'something@mail.com'
@@ -18,9 +17,9 @@ def create_new_user(data):
 
 def user_to_json(user):
     user_dict = {}
-    if hasattr(user, 'username') and user.username != User.username:
+    if hasattr(user, 'username'):
         user_dict['username'] = user.username
-    if hasattr(user, 'email') and user.email != User.email:
+    if hasattr(user, 'email'):
         user_dict['email'] = user.email
-    
+
     return json.dumps(user_dict)
