@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo $PWD
+# echo $PWD
 printenv | grep H | cut -d= -f1
